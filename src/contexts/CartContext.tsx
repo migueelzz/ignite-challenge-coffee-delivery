@@ -35,11 +35,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   const navigate = useNavigate()
 
   const [cart, setCart] = useState<Item[]>([])
-  const [orders, setOrders] = useState<Order[]>([])
+  const [orders, setOrders] = useState<Order[]>([] || storedStateAsJSON)
 
   function addItem(item: Item) {
-    // const itemAlreadyAdded = cart.find((cartItem) => cartItem.id === item.id)
-    console.log('item adicionado ao carrinho')
     setCart([...cart, item])
   }
 
@@ -47,8 +45,6 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     const cartItensWithoutOne = cart.filter((cartItem) => {
       return cartItem.id !== itemId
     })
-
-    console.log('item removido do carrinho')
     setCart(cartItensWithoutOne)
   }
 
